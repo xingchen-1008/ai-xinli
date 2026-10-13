@@ -26,6 +26,7 @@
 import { ref } from 'vue'
 
 const handleCommand = (command) => {
+  console.log(command)
   if (command === 'logout') {
     // 处理退出登录逻辑
   }
@@ -33,7 +34,7 @@ const handleCommand = (command) => {
 </script>
 <style lang="scss" scoped>
 .navbar {
-  height: 64px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
