@@ -1,13 +1,27 @@
 <template>
-    <el-form>
+    <el-form :model="formData">
         <template v-for="item in formItem" :key="item.prop">
             <el-form-item :label="item.label" :prop="item.prop">
-                <component :is="isComp(item.comp)" :placeholder="item.placeholder"></component>
+                <component v-model="formData[item.prop]" :is="isComp(item.comp)"  :placeholder="item.placeholder">
+                    <template v-if="item.comp === 'select'">
+                    <el-option label="全部" value=""  />
+                    <el-option 
+                        v-for="opt in item.options"
+                        :key="opt.value"
+                        :label="opt.label"
+                        :value="opt.value" />
+                    </template>
+                </component>
             </el-form-item>
         </template>
     </el-form>
 </template>
 <script setup>
+import { ref, reactive } from 'vue'
+
+//表单数据
+const formData = reactive({})
+
 const props = defineProps({
     formItem: {
         type: Array,
